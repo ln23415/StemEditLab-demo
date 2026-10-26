@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="试听 StemEditLab 的真实 Bass 局部生成编辑：同一时间轴比较原版与编辑版，以及完整混音。">
+  <title>StemEditLab · 听见局部编辑</title>
+  <link rel="stylesheet" href="./style.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <header class="site-header wrap">
+    <a class="brand" href="./"><span class="brand-mark" aria-hidden="true">s/e</span> StemEditLab</a>
+    <nav aria-label="主导航"><a href="#listen">试听</a><a href="#method">方法</a><a href="https://github.com/ln23415/StemEditLab#readme">本机运行 ↗</a></nav>
+  </header>
+  <main class="wrap">
+    <section class="intro" aria-labelledby="page-title">
+      <p class="eyebrow">LOCAL MUSIC EDITING / AUDIO DEMO</p>
+      <h1 id="page-title">一段新的 Bass。<br><span>放回同一首音乐。</span></h1>
+      <div class="intro-bottom"><p class="lead">用文字重写选中的乐句，保留前后音乐。<br>在下方切换原版与编辑版，直接听两者的区别。</p><p class="sample-note"><span class="status-dot"></span>真实生成样例<br><span>32 秒 · 立体声 · 修改 8–12 秒</span></p></div>
+    </section>
+
+    <section class="listening" id="listen" aria-labelledby="listen-title">
+      <div class="panel-heading"><div><p class="eyebrow">01 / LISTEN</p><h2 id="listen-title">同一时间轴，直接 A/B</h2></div><span class="sample-tag">n0p85_s202</span></div>
+      <blockquote><span>修改描述</span>“重写 Bass 旋律，保持原有演奏音色、相近力度和律动，与前后乐句自然连接。”</blockquote>
+      <div class="mode-row"><div class="segmented" role="group" aria-label="试听内容"><button type="button" data-mode="bass" aria-pressed="true">Bass 单轨</button><button type="button" data-mode="mix" aria-pressed="false">Full Mix 完整音乐</button></div><span class="edit-legend"><i></i>红色区域为唯一修改区 · 8.00–12.00 秒</span></div>
+      <div class="transport">
+        <button type="button" class="play-button" id="play" disabled><span aria-hidden="true">▶</span> <span id="play-label">加载音频</span></button>
+        <div class="segmented ab-switch" role="group" aria-label="当前听到的版本"><button type="button" data-version="a" aria-pressed="true"><b>A</b> 原版</button><button type="button" data-version="b" aria-pressed="false"><b>B</b> 编辑版</button></div>
+        <output class="clock" id="clock" aria-label="播放位置">00:00.00 <span>/ 00:32.00</span></output>
+      </div>
+      <div class="wave-row active" id="row-a"><div class="wave-label"><span><b>A</b> 原始 Bass</span><span class="audible">正在监听</span></div><canvas id="wave-a" height="160" tabindex="0" role="slider" aria-label="A 原版播放位置，左右方向键移动，空格播放暂停" aria-valuemin="0" aria-valuemax="32" aria-valuenow="0"></canvas></div>
+      <div class="wave-row" id="row-b"><div class="wave-label"><span><b>B</b> 编辑后的 Bass</span><span class="audible">正在监听</span></div><canvas id="wave-b" height="160" tabindex="0" role="slider" aria-label="B 编辑版播放位置，左右方向键移动，空格播放暂停" aria-valuemin="0" aria-valuemax="32" aria-valuenow="0"></canvas></div>
+      <p class="wave-help">点击任一波形定位 · 空格播放 / 暂停 · A/B 切换保持播放位置</p>
+      <div class="bottom-controls">
+        <div class="loop-control"><label for="loop">循环试听</label><select id="loop"><option value="off">关闭循环</option><option value="selection">修改区 · 8–12 秒</option><option value="left">左边界 · 7–9 秒</option><option value="right">右边界 · 11–13 秒</option><option value="all">整段 · 0–32 秒</option></select></div>
+        <div class="gain-control"><label for="gain">共同监听音量 <output id="gain-label">-3 dB</output></label><input id="gain" type="range" min="-18" max="-1" step="0.5" value="-3"><small id="gain-note">A/B 使用同一音量；只影响试听，不改变下载音频。</small></div>
+      </div>
+      <p id="status" role="status">正在载入真实音频…</p>
+      <details class="details"><summary>样例参数与音频下载</summary><div class="detail-content"><dl><div><dt>编辑模型</dt><dd>Stable Audio 3 Medium · post-trained</dd></div><div><dt>生成参数</dt><dd>Seed 202 · init_noise_level 0.85 · 8 steps</dd></div><div><dt>音频条件</dt><dd>原始 Bass 初始化 + 左右各 3 秒上下文 inpainting</dd></div><div><dt>局部替换</dt><dd>选区内短 constant-sum 过渡；Full Mix 由 Bass 差分更新</dd></div></dl><p class="caption-label">实际英文 caption</p><p id="caption" lang="en" class="caption"></p><div id="downloads" class="downloads"></div><p class="fineprint" id="format-note"></p><a href="./sample.json">查看公开样例元数据</a></div></details>
+    </section>
+
+    <section class="method" id="method" aria-labelledby="method-title"><p class="eyebrow">02 / HOW IT WORKS</p><h2 id="method-title">完整生成，局部改写。</h2><div class="method-flow"><article><span>01</span><h3>生成音乐</h3><p>ACE-Step XL Turbo<br>生成完整的原始音乐。</p></article><article><span>02</span><h3>分离 Bass</h3><p>htdemucs_6s<br>提取可编辑的目标轨道。</p></article><article><span>03</span><h3>按文字局部编辑</h3><p>Stable Audio 3 Medium<br>参考原音色与前后乐句生成。</p></article><article><span>04</span><h3>替换并试听</h3><p>DSP 局部接入 + Mix delta<br>更新选区，保留其余音乐。</p></article></div><p class="scope-note">这里展示的是一个已生成的 32 秒样例，不包含 MUSDB18 音频或人工评分，也不代表所有素材的编辑效果。网页只负责试听；要自行生成、选择区域和编辑，请在有相应模型与 GPU 的机器上运行完整项目。</p></section>
+    <section class="next-step"><div><p class="eyebrow">03 / TRY IT YOURSELF</p><h2>在自己的机器上，编辑自己的音乐。</h2><p>安装环境、下载模型与权重，再启动本地实验页面。</p></div><a class="button-link" href="https://github.com/ln23415/StemEditLab#readme">查看部署说明 ↗</a><p class="repo-note">主代码仓库目前为私有，需要仓库访问授权。公开试听无需账号。</p></section>
+  </main>
+  <footer class="wrap"><span>StemEditLab · Bass local editing experiment</span><a href="https://github.com/ln23415/StemEditLab-demo">公开样例仓库 ↗</a></footer>
+</body>
+</html>
