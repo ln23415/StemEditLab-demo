@@ -1,0 +1,130 @@
+{
+  "song": "Angela Thomas Wade - Milk Cow Blues",
+  "dataset": "MUSDB18",
+  "split": "train",
+  "mode": "Reference Bass",
+  "source_url": "https://sigsep.github.io/datasets/musdb.html",
+  "original_recording_source": "DSD100 / Mixing Secrets Multitrack Library",
+  "preview_seconds": 14,
+  "source_preview_range_seconds": [
+    45.722,
+    59.722
+  ],
+  "metrics_note": "Boundary: chroma similarity at both ends to unchanged mix context. Simultaneous: confident Bass pitch-class/chord compatibility against independent accompaniment, conditional on valid coverage. Neither is edit accuracy.",
+  "selection_note": "Three selected examples from 36 train candidates; not an aggregate success-rate estimate.",
+  "rows": [
+    {
+      "example": "melody_s202",
+      "song": "Angela Thomas Wade - Milk Cow Blues",
+      "task": "旋律重写",
+      "seed": 202,
+      "song_edit_start_seconds": 48.722,
+      "song_edit_end_seconds": 56.722,
+      "preview_edit_start_seconds": 3.0,
+      "preview_edit_end_seconds": 11.0,
+      "boundary_harmony_pct": 76.32837677001953,
+      "left_boundary_pct": 81.29898071289062,
+      "right_boundary_pct": 71.35777282714844,
+      "simultaneous_harmony_estimate_pct": 84.615,
+      "simultaneous_valid_coverage_pct": 40.625,
+      "original_bass": "preview/original_bass.wav",
+      "edited_bass": "melody_s202/preview_bass.wav",
+      "edited_mix": "melody_s202/preview_mix.wav",
+      "candidate_id": "reference-train-angela-thomas-wade-milk-cow-blues-d683ebc6-melody-s202",
+      "outside_pcm_exact": true,
+      "original_mix": "preview/original_mix.wav"
+    },
+    {
+      "example": "density_s101",
+      "song": "Angela Thomas Wade - Milk Cow Blues",
+      "task": "增加密度与切分",
+      "seed": 101,
+      "song_edit_start_seconds": 48.722,
+      "song_edit_end_seconds": 56.722,
+      "preview_edit_start_seconds": 3.0,
+      "preview_edit_end_seconds": 11.0,
+      "boundary_harmony_pct": 84.51521682739258,
+      "left_boundary_pct": 89.27110290527344,
+      "right_boundary_pct": 79.75933074951172,
+      "simultaneous_harmony_estimate_pct": 73.333,
+      "simultaneous_valid_coverage_pct": 46.875,
+      "original_bass": "preview/original_bass.wav",
+      "edited_bass": "density_s101/preview_bass.wav",
+      "edited_mix": "density_s101/preview_mix.wav",
+      "candidate_id": "reference-train-angela-thomas-wade-milk-cow-blues-d683ebc6-density-s101",
+      "outside_pcm_exact": true,
+      "original_mix": "preview/original_mix.wav"
+    },
+    {
+      "example": "simplify_s202",
+      "song": "Angela Thomas Wade - Milk Cow Blues",
+      "task": "简化乐句",
+      "seed": 202,
+      "song_edit_start_seconds": 48.722,
+      "song_edit_end_seconds": 56.722,
+      "preview_edit_start_seconds": 3.0,
+      "preview_edit_end_seconds": 11.0,
+      "boundary_harmony_pct": 71.8617935180664,
+      "left_boundary_pct": 71.44999694824219,
+      "right_boundary_pct": 72.27359008789062,
+      "simultaneous_harmony_estimate_pct": 87.5,
+      "simultaneous_valid_coverage_pct": 50.0,
+      "original_bass": "preview/original_bass.wav",
+      "edited_bass": "simplify_s202/preview_bass.wav",
+      "edited_mix": "simplify_s202/preview_mix.wav",
+      "candidate_id": "reference-train-angela-thomas-wade-milk-cow-blues-d683ebc6-simplify-s202",
+      "outside_pcm_exact": true,
+      "original_mix": "preview/original_mix.wav"
+    }
+  ],
+  "files": {
+    "preview/original_bass.wav": {
+      "sha256": "27c6072ca293595fed92e43b5c52a77b9f6e88e655b8ebe216fcea425be11595",
+      "frames": 617400,
+      "sample_rate": 44100,
+      "channels": 2
+    },
+    "preview/original_mix.wav": {
+      "sha256": "8bc0564493e313214e728fc451630ea0c32f051920eeee2bf47590b738dbc573",
+      "frames": 617400,
+      "sample_rate": 44100,
+      "channels": 2
+    },
+    "melody_s202/preview_bass.wav": {
+      "sha256": "a5303d7aed833bfd7a89490b5f6a354f0c73237379e4f3cb736c1d0547db6252",
+      "frames": 617400,
+      "sample_rate": 44100,
+      "channels": 2
+    },
+    "melody_s202/preview_mix.wav": {
+      "sha256": "9b2fb2a3ea0490d79f619236e48dd4a3a59594842ea1d80b0283c5a5886a0fac",
+      "frames": 617400,
+      "sample_rate": 44100,
+      "channels": 2
+    },
+    "density_s101/preview_bass.wav": {
+      "sha256": "6c28076b62b6304157583d45e5f62b535d4d8e1b4e27208c60a6eb33326dce94",
+      "frames": 617400,
+      "sample_rate": 44100,
+      "channels": 2
+    },
+    "density_s101/preview_mix.wav": {
+      "sha256": "b02633b9cc36fccbedac9fc7ca713f472e17ea200dc490aa0419cdc54aaa2b99",
+      "frames": 617400,
+      "sample_rate": 44100,
+      "channels": 2
+    },
+    "simplify_s202/preview_bass.wav": {
+      "sha256": "f4070f50032c8ace9f199a607f2e8f053f055c46ae40be603927071e0e657e1a",
+      "frames": 617400,
+      "sample_rate": 44100,
+      "channels": 2
+    },
+    "simplify_s202/preview_mix.wav": {
+      "sha256": "4484a49f5c725d80984b8a4c11b8ffd26607a5e17a27032ca876612feaebaf18",
+      "frames": 617400,
+      "sample_rate": 44100,
+      "channels": 2
+    }
+  }
+}
